@@ -6,6 +6,9 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/player'
 require './lib/board'
+require './lib/ship'
+require './lib/peg'
+require './lib/validate'
 
 class BoardTest < Minitest::Test
 
@@ -23,26 +26,11 @@ class BoardTest < Minitest::Test
     assert_equal "computer", board.player
   end
 
-  def test_it_creates_nested_array_for_ship_and_guess_boards
+  def test_it_creates_a_default_nested_array_layout
     board = Board.new("computer")
     expected = [ [0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0] ]
 
-    assert_equal expected, board.ship_layout
-    assert_equal expected, board.guess_layout
+    assert_equal expected, board.layout
   end
 
-  def test_it_creates_the_ship_and_guess_board_arrays_using_provided_dimensions
-    board = Board.new("computer", 3, 3)
-    expected = [ [0,0,0], [0,0,0], [0,0,0] ]
-
-    assert_equal expected, board.ship_layout
-    assert_equal expected, board.guess_layout
-  end
-
-  def test_printing_out_the_board
-    skip
-    board = Board.new("computer")
-    board.print_board(board.ship_layout)
-  end
-  
 end
