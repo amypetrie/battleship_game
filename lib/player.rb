@@ -12,17 +12,18 @@ class Player
 
   def generate_ship_coordinates(size)
 
-    loop do until valid?
+    # loop do until valid?
 
       letter = ("a".."d").to_a
       number = (1..4).to_a
-      beginning_position = (letter.sample + number.sample).chars
+      beginning_position = (letter.sample + number.sample.to_s).chars
+      binding.pry
+      if beginning_position[1].to_i >= size && letter.rindex(beginning_position[0])+1 < size
+        direction == "down" || "back"
+      end
 
+      direction = ["horizontal forward", "horizontal backward", "vertical up", "vertical down"].sample
 
-      direction = ["horizontal", "vertical"].sample
-      end_position = beginning_position
-
-    validate(beginning_position, end_position)
     return beginning_position, end_position
   end
 
