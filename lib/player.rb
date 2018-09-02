@@ -11,8 +11,8 @@ class Player
   end
 
 
-  def place_ship(bow_position, stern_position)
-    ship board << bow, stern...
-  end
+  # def place_ship(bow_position, stern_position)
+  #   ship board << bow, stern...
+  # end
 
 end

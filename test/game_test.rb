@@ -30,18 +30,11 @@ class GameTest < Minitest::Test
     assert_instance_of Player, game.computer_player
   end
 
-  def test_it_generates_coordinates
+  def test_create_bow_peg_creates_peg
     game = Game.new
 
-    assert_equal "", game.generate_ship_coordinates(3)
+    assert_instance_of Peg, game.create_bow_peg
   end
 
-end
 
-
-
-def generate_bow_position(size)
-  letters = ("a".."d").to_a
-  numbers = (1..4).to_a
-  bow_position = [letters.sample] + [numbers.sample]
 end
