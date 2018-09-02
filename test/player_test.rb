@@ -24,9 +24,4 @@ class PlayerTest < Minitest::Test
     assert_equal "computer", player.id
   end
 
-  def test_it_generates_coordinates
-    player = Player.new("computer")
-
-    assert_equal "", player.generate_ship_coordinates(3)
-  end
 end

@@ -2,12 +2,18 @@ require 'pry'
 
 class Ship
 
-  attr_reader :beginning_position,
-              :end_position
+  attr_reader :bow_position,
+              :stern_position,
+              :letters,
+              :numbers,
+              :validation
 
-  def initialize(beginning_position, end_position)
-    @beginning_position = beginning_position
-    @end_position = end_position
+  def initialize(bow_position, stern_position)
+    @bow_position = bow_position
+    @stern_position = stern_position
+    @letters = ("a".."d").to_a
+    @numbers = (1..4).to_a
+    @validation = Validation.new
   end
 
 end
