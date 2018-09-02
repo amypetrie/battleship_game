@@ -18,10 +18,15 @@ class Player
       number = (1..4).to_a
       beginning_position = (letter.sample + number.sample.to_s).chars
       binding.pry
-      if beginning_position[1].to_i >= size && letter.rindex(beginning_position[0])+1 < size
-        direction == "down" || "back"
+      if beginning_position[1].to_i >= size && letter.rindex(letter.last) + 1 >= size - letter.rindex(beginning_position[0])
+        direction == "back" || "down" || "forward" || "up"
+      elsif beginning_position[1].to_i >= size && letter.rindex(beginning_position[0])+1 >= size
+        direction == "back" || "up"
+      elsif beginning_position[1].to_i <= size && letter.rindex(beginning_position[0])+1 <= size
+        direction == "forward" || "down"
+      elsif beginning_position[1].to_i <= size && letter.rindex(beginning_position[0])+1 >= size
+        direction == "forward" || "up"
       end
-
       direction = ["horizontal forward", "horizontal backward", "vertical up", "vertical down"].sample
 
     return beginning_position, end_position
