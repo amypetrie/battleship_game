@@ -27,6 +27,6 @@ class PlayerTest < Minitest::Test
   def test_it_generates_coordinates
     player = Player.new("computer")
 
-    assert_equal "", player.generate_ship_coordinates(2)
+    assert_equal "", player.generate_ship_coordinates(3)
   end
 end

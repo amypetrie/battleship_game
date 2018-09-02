@@ -14,11 +14,16 @@ class Player
 
     # loop do until valid?
 
-      letter = ("a".."d").to_a
-      number = (1..4).to_a
-      beginning_position = (letter.sample + number.sample.to_s).chars
+      letters = ("a".."f").to_a
+      numbers = (1..6).to_a
+      beginning_position = (letters.sample + numbers.sample.to_s).chars
+      letter_index = letters.rindex(beginning_position[0])
+      number = beginning_position[1].to_i
       binding.pry
-      if beginning_position[1].to_i >= size && letter.rindex(letter.last) + 1 >= size - letter.rindex(beginning_position[0])
+      if ((number - size) >= 0) && ((number + size - 1) <= numbers.last)
+        direction == "forward"|| "back"
+
+        letter.rindex(letter.last) + 1 >= size - letter.rindex(beginning_position[0]) + 1 <= letters.length - size
         direction == "back" || "down" || "forward" || "up"
       elsif beginning_position[1].to_i >= size && letter.rindex(beginning_position[0])+1 >= size
         direction == "back" || "up"
