@@ -9,18 +9,7 @@ class Game
   end
 
   def start
-  end
-
-  def place_bow_peg
-      letters = ("a".."d").to_a
-      numbers = (1..4).to_a
-      bow_position = [letters.sample] + [numbers.sample]
-      bow_peg = Peg.new(bow_position, @computer_player.guess_board)
-      if bow_peg.empty_and_valid
-        @computer_player.guess_board.layout[bow_peg.first_coordinate][bow_peg.second_coordinate] = "CS12"
-      else
-        create_bow_peg
-      end
+    @computer_player.place_ship
   end
 
 end

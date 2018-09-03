@@ -30,11 +30,4 @@ class GameTest < Minitest::Test
     assert_instance_of Player, game.computer_player
   end
 
-  def test_place_bow_peg
-    game = Game.new
-
-    assert_equal "", game.place_bow_peg
-  end
-
-
 end
