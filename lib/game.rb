@@ -9,17 +9,21 @@ class Game
   end
 
   def start
-
   end
 
-  def create_bow_peg
-    # loop do until bow_peg.validate?
-    letters = ("a".."d").to_a
-    numbers = (1..4).to_a
-    bow_position = [letters.sample] + [numbers.sample]
-    bow_peg = Peg.new(bow_position, @computer_player.guess_board)
-    binding.pry
+  def place_bow_peg
+      letters = ("a".."d").to_a
+      numbers = (1..4).to_a
+      bow_position = [letters.sample] + [numbers.sample]
+      bow_peg = Peg.new(bow_position, @computer_player.guess_board)
+      if bow_peg.empty_and_valid
+        @computer_player.guess_board.layout[bow_peg.first_coordinate][bow_peg.second_coordinate] = "CS12"
+      else
+        create_bow_peg
+      end
   end
+
+end
 
   #   letter_index = letters.rindex(bow_position[0])
   #   number = bow_position[1]
@@ -56,5 +60,3 @@ class Game
   #   return bow_position + stern_position
   #
   # end
-
-end
