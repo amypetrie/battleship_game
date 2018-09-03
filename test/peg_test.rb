@@ -25,6 +25,12 @@ class PegTest < Minitest::Test
     assert_equal 1, peg.first_coordinate
   end
 
+  def test_it_returns_location_on_board
+    board = Board.new("computer")
+    peg = Peg.new(board, "shot", ["b", 3])
+    assert_equal [0, 2], peg.board_position
+  end
+
   def test_it_returns_second_board_coordinate
     board = Board.new("computer")
     peg = Peg.new(board, "shot", ["a", 3])
@@ -35,7 +41,7 @@ class PegTest < Minitest::Test
     player = Player.new("computer")
     board = player.ship_board
     peg = Peg.new(board)
-    peg.random_peg("shot")
+    peg.randomize("shot")
 
     assert true, peg.empty_and_valid
   end
@@ -44,7 +50,16 @@ class PegTest < Minitest::Test
     human = Player.new("human")
     computer = Player.new("computer")
     peg = Peg.new(computer.ship_board)
-    peg.random_peg("ship1")
+    peg.randomize("ship1")
+
     assert true, computer.ship_board.layout.include?(peg.status)
+  end
+
+  def test_it_creates_a_ship
+    human = Player.new("human")
+    computer = Player.new("computer")
+    peg = Peg.new(computer.ship_board, "cs13")
+
+    assert_equal "", peg.create_ship(3)
   end
 end
