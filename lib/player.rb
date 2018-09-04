@@ -10,12 +10,21 @@ class Player
     @ship_ids = []
   end
 
-  def place_peg(location=[], ship_ids)
-    peg = Peg.new(@guess_board, location, ship_ids)
+  def make_specific_guess(location, opponent)
+    peg = Peg.new(@guess_board, @ship_ids, location)
+    peg.space_is_valid
+    peg.place_valid_peg_on_board(opponent)
   end
 
-  def make_ship(guess_board)
+  def make_random_guess(opponent)
+    peg = Peg.new(@guess_board, @ship_ids)
+    peg.randomize_location
+    peg.place_valid_peg_on_board(opponent)
+  end
 
+  def make_random_ship(size)
+    peg = Peg.new(@guess_board, @ship_ids)
+    peg.create_computer_ship(size)
   end
 
 end

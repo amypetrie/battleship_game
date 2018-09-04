@@ -36,4 +36,28 @@ class PlayerTest < Minitest::Test
     assert_equal [], player.ship_ids
   end
 
+  def test_make_specific_guess
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    player.make_specific_guess(["a", 4], player2)
+
+    assert_equal true, player.guess_board.layout.flatten.include?("M")
+  end
+
+  def test_make_a_random_guess
+    player = Player.new("computer")
+    player2 = Player.new("human")
+    player.make_random_guess(player2)
+
+    assert_equal true, player.guess_board.layout.flatten.include?("M")
+  end
+
+  def test_making_a_random_ship
+    player = Player.new("computer")
+    player.make_random_ship(3)
+    player.make_random_ship(2)
+
+    assert_equal 5, player.ship_ids.flatten(1).length
+  end
+
 end

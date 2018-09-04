@@ -30,4 +30,11 @@ class GameTest < Minitest::Test
     assert_instance_of Player, game.computer_player
   end
 
+  def test_start_creates_two_random_computer_ships
+    game = Game.new
+    game.start
+
+    assert_equal 2, game.computer_player.ship_ids.count
+  end
+
 end

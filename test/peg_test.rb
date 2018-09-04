@@ -67,14 +67,26 @@ class PegTest < Minitest::Test
     peg = Peg.new(player.guess_board, player2.ship_ids)
     peg.randomize_location
 
-    assert_equal "", peg.location
+    assert_equal true, peg.location != ""
   end
+
+  def test_it_creates_a_computer_ship
+    human = Player.new("human")
+    computer = Player.new("computer")
+    peg = Peg.new(computer.guess_board, computer.ship_ids)
+    peg.create_computer_ship(3)
+    peg.create_computer_ship(2)
+
+    assert_equal 5, computer.ship_ids.flatten(1).length
+  end
+
+  def test_randomize_ship_bow
+    human = Player.new("human")
+    computer = Player.new("computer")
+    peg = Peg.new(computer.guess_board, computer.ship_ids)
+    peg.randomize_ship_bow
+
+    assert_equal true, peg.location != ""
+  end
+
 end
-#   def test_it_creates_a_ship
-#     human = Player.new("human")
-#     computer = Player.new("computer")
-#     peg = Peg.new(computer.ship_board, "cs13")
-#
-#     assert_equal "", peg.create_ship(3)
-#   end
-# end

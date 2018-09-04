@@ -9,7 +9,9 @@ class Game
   end
 
   def start
-    @computer_player.place_ship
+    @computer_player.make_random_ship(3)
+    @computer_player.make_random_ship(2)
+    human = Player.new("human")
   end
 
 end
