@@ -88,14 +88,4 @@ class PegTest < Minitest::Test
     assert_equal true, peg.location != ""
   end
 
-  def test_it_creates_a_computer_ship
-    human = Player.new("human")
-    computer = Player.new("computer")
-    peg = Peg.new(computer.guess_board, computer.ship_ids)
-    peg.create_computer_ship(3)
-    peg.create_computer_ship(2)
-
-    assert_equal 5, computer.ship_ids.flatten(1).length
-  end
-
 end
