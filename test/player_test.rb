@@ -24,4 +24,16 @@ class PlayerTest < Minitest::Test
     assert_equal "computer", player.id
   end
 
+  def test_it_creates_a_board
+    player = Player.new("computer")
+
+    assert_instance_of Board, player.guess_board
+  end
+
+  def test_it_has_ship_ids
+    player = Player.new("computer")
+
+    assert_equal [], player.ship_ids
+  end
+
 end

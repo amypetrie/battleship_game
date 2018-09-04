@@ -1,25 +1,21 @@
 class Player
 
   attr_reader :id,
-              :ship_board,
-              :guess_board
+              :guess_board,
+              :ship_ids
 
   def initialize(id)
     @id = id
-    @ship_board = Board.new(id)
     @guess_board = Board.new(id)
+    @ship_ids = []
   end
 
-  def place_peg(board, status, location=[])
-    peg = Peg.new(board, status, location)
+  def place_peg(location=[], ship_ids)
+    peg = Peg.new(@guess_board, location, ship_ids)
   end
 
-  def make_ship()
+  def make_ship(guess_board)
 
   end
 
 end
-
-  # def place_ship(bow_position, stern_position)
-  #   ship board << bow, stern...
-  # end

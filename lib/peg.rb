@@ -1,49 +1,19 @@
 class Peg
 
   attr_reader :board,
+              :location,
+              :ship_ids,
               :letters,
               :numbers,
-              :location,
               :status
 
-  def initialize(board, status="", location=[])
+  def initialize(board, location=[], ship_ids)
     @board = board
     @location = location
     @letters = ("a".."d").to_a
     @numbers = (1..4).to_a
-    @status = status
-  end
-
-  def board_position
-    @board.layout[first_coordinate][second_coordinate]
-  end
-
-  def randomize(status)
-      location = [@letters.sample] + [@numbers.sample]
-      @location = location
-      if empty_and_valid == true
-        @status = status
-        place_on_board
-      else
-        random_peg(status)
-      end
-    return @status
-  end
-
-  def empty_and_valid
-    if board_position == 0
-      true
-    elsif board_position.include?("X")
-      "You got a hit!"
-    else
-      "You already have a peg at this location."
-    end
-  end
-
-  def place_on_board
-    if empty_and_valid == true
-      @board.layout[first_coordinate][second_coordinate] = @status
-    end
+    @ship_ids = ship_ids
+    @status = ""
   end
 
   def first_coordinate
@@ -52,6 +22,35 @@ class Peg
 
   def second_coordinate
     @numbers.rindex(location[1])
+  end
+
+  def board_position
+    @board.layout[first_coordinate][second_coordinate]
+  end
+
+  def randomize_location
+    loop do
+      location = [@letters.sample] + [@numbers.sample]
+      @location = location
+    break if space_is_valid == true
+      randomize_location
+    end
+  end
+
+  def space_is_valid
+    if board_position == 0
+      true
+    else
+      "You already have a peg at this location."
+    end
+  end
+
+  def place_miss_on_board
+    @board.position = "miss"
+  end
+
+  def place_hit_on_board
+    @board.position = "hit"
   end
 
   def create_ship(size)
