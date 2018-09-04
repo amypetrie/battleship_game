@@ -52,6 +52,15 @@ class PegTest < Minitest::Test
     assert true, peg.space_is_valid
   end
 
+  def test_placing_valid_peg_on_board_as_miss
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+    peg.place_valid_peg_on_board
+
+    assert_equal true, player.guess_board.layout.flatten.include?("M")
+  end
+
   def test_it_generates_a_random_peg
     player = Player.new("human")
     player2 = Player.new("computer")
