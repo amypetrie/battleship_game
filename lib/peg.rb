@@ -7,7 +7,7 @@ class Peg
               :numbers,
               :status
 
-  def initialize(board, location=[], ship_ids)
+  def initialize(board, ship_ids, location=[])
     @board = board
     @location = location
     @letters = ("a".."d").to_a
@@ -44,14 +44,14 @@ class Peg
       "You already have a peg at this location."
     end
   end
-
-  def place_miss_on_board
-    @board.position = "miss"
-  end
-
-  def place_hit_on_board
-    @board.position = "hit"
-  end
+  #
+  # def place_miss_on_board
+  #   @board.position = "miss"
+  # end
+  #
+  # def place_hit_on_board
+  #   @board.position = "hit"
+  # end
 
   def create_ship(size)
     randomize(@status)
