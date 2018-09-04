@@ -65,30 +65,31 @@ class Peg
   end
 
   def check_for_sunk_ship(opponent)
-    if opponent.ship_ids.each do |ship_array|
+    opponent.ship_ids.each do |ship_array|
       if ship_array.length.include?(location)
-        ship_array.delete(location)
-
+        p "You got a hit!"
+        opponent.ship_ids.delete(location)
         p "You sunk a ship!"
         opponent.ship_ids.delete(ship_array)
+        binding.pry
       else
       end
-    else
+    end
+  end
 
   def place_valid_peg_on_board(opponent)
     space_is_valid
       if space_is_valid == true
         if opponent.ship_ids.flatten(1).include?(location)
-          board_position = "H"
+          @board.layout[first_coordinate][second_coordinate] = "H"
           p "You got a hit!"
           check_for_sunk_ship(opponent)
         else
-          board_position = "M"
+          @board.layout[first_coordinate][second_coordinate] = "M"
           p "You missed."
         end
       else
       end
-    @board.layout
   end
 
   def create_computer_ship(size)
@@ -113,34 +114,43 @@ class Peg
       direction_options << "down"
     end
 
-    direction = direction_options.sample
+    middle = []
+    stern_position = []
 
-    if direction == "forward"
-      stern_position = [(location[0]), number + size - 1]
-    elsif direction == "backward"
-      stern_position = [(location[0]), number - size + 1]
-    elsif direction == "up"
-      stern_position = [(letters[letter_index - size + 1]), number]
-    elsif direction == "down"
-      stern_position = [(letters[letter_index + size - 1]), number]
-    end
+    loop do
+      direction = direction_options.sample
 
-    if size > 2
       if direction == "forward"
-        middle = [(location[0]), number + size - 2]
+        stern_position << [(location[0]), number + size - 1]
       elsif direction == "backward"
-        middle = [(location[0]), number - size + 2]
+        stern_position << [(location[0]), number - size + 1]
       elsif direction == "up"
-        middle = [(letters[letter_index - size + 2]), number]
+        stern_position << [(letters[letter_index - size + 1]), number]
       elsif direction == "down"
-        middle = [(letters[letter_index + size - 2]), number]
+        stern_position << [(letters[letter_index + size - 1]), number]
       end
+
+      if size > 2
+        if direction == "forward"
+          middle << [(location[0]), number + size - 2]
+        elsif direction == "backward"
+          middle << [(location[0]), number - size + 2]
+        elsif direction == "up"
+          middle << [(letters[letter_index - size + 2]), number]
+        elsif direction == "down"
+          middle << [(letters[letter_index + size - 2]), number]
+        end
+      else middle = nil
+      end
+
+    break if (@ship_ids.include?(middle) == false) && (@ship_ids.include?(stern_position) == false)
     end
 
-    @ship_ids << [location] + [middle] + [stern_position]
-    @ship_ids.map do |array|
+      @ship_ids << [location] + [middle] + [stern_position]
+
+      @ship_ids.map do |array|
       array.compact!
-    end
+      end
 
   end
 

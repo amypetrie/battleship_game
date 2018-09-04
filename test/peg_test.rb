@@ -56,9 +56,8 @@ class PegTest < Minitest::Test
     player = Player.new("human")
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
-    peg.place_valid_peg_on_board
 
-    assert_equal true, player.guess_board.layout.flatten.include?("M")
+    assert_equal "You missed.", peg.place_valid_peg_on_board(player2)
   end
 
   def test_it_generates_a_random_peg
@@ -87,6 +86,16 @@ class PegTest < Minitest::Test
     peg.randomize_ship_bow
 
     assert_equal true, peg.location != ""
+  end
+
+  def test_it_creates_a_computer_ship
+    human = Player.new("human")
+    computer = Player.new("computer")
+    peg = Peg.new(computer.guess_board, computer.ship_ids)
+    peg.create_computer_ship(3)
+    peg.create_computer_ship(2)
+
+    assert_equal 5, computer.ship_ids.flatten(1).length
   end
 
 end
