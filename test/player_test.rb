@@ -60,12 +60,18 @@ class PlayerTest < Minitest::Test
     assert_equal 5, player.ship_ids.flatten(1).length
   end
 
-  def test_making_a_specific_ship
+  def test_making_a_2_length_human_ship
     player = Player.new("human")
-    player.make_specific_ship(2)
-    player.make_specific_ship(3)
+    player.human_ship(2, ["c", 4], ["c", 3])
 
-    assert_equal 5, player.ship_ids.flatten(1).length
+    assert_equal 2, player.ship_ids.flatten(1).length
   end
-  
+
+  def test_making_a_3_length_human_ship
+    player = Player.new("human")
+    player.human_ship(2, ["c", 1], ["c", 3])
+
+    assert_equal 3, player.ship_ids.flatten(1).length
+  end
+
 end

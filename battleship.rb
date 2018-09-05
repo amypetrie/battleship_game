@@ -13,7 +13,7 @@ if user_input == "p"
 
   game = Game.new
   game.start
-  p game.introduction
+  puts game.introduction
   user_input = $stdin.gets.chomp
   game.human_player.create_human_ship(user_input, 2)
   p game.human_player.ship_ids
@@ -22,5 +22,3 @@ if user_input == "p"
   #display map and prompt position.
 
 end
-
-human_ship_1 = game.human_player.make_specific_ship(2, bow, stern)

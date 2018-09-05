@@ -15,14 +15,6 @@ class Game
     @computer_player.make_random_ship(2)
   end
 
-  def create_human_ship(user_input, size)
-    bow = user_input.downcase.chars[0..1]
-    bow[1] = bow[1].to_i
-    stern = user_input.downcase.chars[3..4]
-    stern[4] = stern[4].to_i
-    @human_player.human_ship(size, bow, stern)
-  end
-
   def introduction
     "I have laid out my ships on the grid.
     You now need to layout your two ships.

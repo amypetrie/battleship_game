@@ -16,10 +16,13 @@ class Player
     peg.place_valid_peg_on_board(opponent)
   end
 
-  def human_ship(size, bow, stern)
+  def create_human_ship(user_input, size)
+    bow = user_input.downcase.chars[0..1]
+    bow[1] = bow[1].to_i
+    stern = user_input.downcase.chars[3..4]
+    stern[4] = stern[4].to_i
     peg = Peg.new(@guess_board, @ship_ids, location=bow)
     peg.specific_ship(size, stern)
-
   end
 
   def make_random_guess(opponent)
