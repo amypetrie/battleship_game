@@ -16,9 +16,9 @@ class Player
     peg.place_valid_peg_on_board(opponent)
   end
 
-  def make_specific_ship(size, bow, stern)
+  def human_ship(size, bow, stern)
     peg = Peg.new(@guess_board, @ship_ids, location=bow)
-    peg.create_specific_ship(size, stern)
+    peg.specific_ship(size, stern)
 
   end
 

@@ -81,17 +81,17 @@ class Peg
       if space_is_valid == true
         if opponent.ship_ids.flatten(1).include?(location)
           @board.layout[first_coordinate][second_coordinate] = "H"
-          p "You got a hit!"
+          "You got a hit!"
           check_for_sunk_ship(opponent)
         else
           @board.layout[first_coordinate][second_coordinate] = "M"
-          p "You missed."
+          "You missed."
         end
       else
       end
   end
 
-  def create_specific_ship(size, stern)
+  def specific_ship(size, stern)
     letter_index = letters.rindex(location[0])
     number = location[1]
     middle = []
@@ -99,7 +99,6 @@ class Peg
     if size < 3 && ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
       @ship_ids << [stern] + [location]
     elsif ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
-      binding.pry
       if stern[1] == number && (letters.rindex(location[0]) > letters.rindex(stern[0]))
 
       elsif stern[1] == number && (letters.rindex(location[0]) < letters.rindex(stern[0]))

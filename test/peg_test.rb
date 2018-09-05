@@ -44,6 +44,15 @@ class PegTest < Minitest::Test
     assert_equal 1, peg.second_coordinate
   end
 
+  def test_it_generates_a_random_peg
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids)
+    peg.randomize_location
+
+    assert_equal true, peg.location != ""
+  end
+
   def test_if_peg_location_is_valid
     player = Player.new("human")
     player2 = Player.new("computer")
@@ -60,15 +69,6 @@ class PegTest < Minitest::Test
     assert_equal "You missed.", peg.place_valid_peg_on_board(player2)
   end
 
-  def test_it_generates_a_random_peg
-    player = Player.new("human")
-    player2 = Player.new("computer")
-    peg = Peg.new(player.guess_board, player2.ship_ids)
-    peg.randomize_location
-
-    assert_equal true, peg.location != ""
-  end
-
   def test_it_creates_a_computer_ship
     human = Player.new("human")
     computer = Player.new("computer")
@@ -82,7 +82,7 @@ class PegTest < Minitest::Test
   def test_it_creates_a_specific_ship_length_3
     human = Player.new("human")
     computer = Player.new("computer")
-    human.make_specific_ship(3, ["b", 3], ["b", 1])
+    human.human_ship(3, ["b", 3], ["b", 1])
 
     assert_equal 3, human.ship_ids.flatten(1).length
   end
@@ -90,7 +90,7 @@ class PegTest < Minitest::Test
   def test_it_creates_a_specific_ship_length_2
     human = Player.new("human")
     computer = Player.new("computer")
-    human.make_specific_ship(2, ["b", 1], ["b", 2])
+    human.human_ship(2, ["b", 1], ["b", 2])
 
     assert_equal 2, human.ship_ids.flatten(1).length
   end
@@ -98,7 +98,7 @@ class PegTest < Minitest::Test
   def test_it_creates_a_specific_ship_length_3_varying_input
     human = Player.new("human")
     computer = Player.new("computer")
-    human.make_specific_ship(3, ["a", 1], ["c", 1])
+    human.human_ship(3, ["a", 1], ["c", 1])
 
     assert_equal 3, human.ship_ids.flatten(1).length
   end
