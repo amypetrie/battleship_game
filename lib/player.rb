@@ -20,7 +20,7 @@ class Player
     bow = user_input.downcase.chars[0..1]
     bow[1] = bow[1].to_i
     stern = user_input.downcase.chars[3..4]
-    stern[4] = stern[4].to_i
+    stern[1] = stern[1].to_i
     peg = Peg.new(@guess_board, @ship_ids, location=bow)
     peg.specific_ship(size, stern)
   end
