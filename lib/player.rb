@@ -10,7 +10,9 @@ class Player
     @ship_ids = []
   end
 
-  def make_specific_guess(location, opponent)
+  def make_specific_guess(user_input, opponent)
+    location = user_input.downcase.chars
+    location[1] = location[1].to_i
     peg = Peg.new(@guess_board, @ship_ids, location)
     peg.space_is_valid
     peg.place_valid_peg_on_board(opponent)

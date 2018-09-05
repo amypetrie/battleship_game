@@ -19,6 +19,12 @@ if user_input == "p"
   puts game.prompt_for_second_ship
   user_input = $stdin.gets.chomp
   game.human_player.create_human_ship(user_input, 3)
+
+
+  puts game.display_map(game.human_player)
+  puts game.prompt_for_guess
+  user_input = $stdin.gets.chomp
+  game.human_player.make_specific_guess(user_input, game.computer_player)
   puts game.display_map(game.human_player)
   #display map and prompt position.
 

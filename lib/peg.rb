@@ -26,6 +26,7 @@ class Peg
   end
 
   def board_position
+    binding.pry
     @board.layout[first_coordinate][second_coordinate]
   end
 
@@ -82,7 +83,7 @@ class Peg
         if opponent.ship_ids.flatten(1).include?(location)
           @board.layout[first_coordinate][second_coordinate] = "H"
           "You got a hit!"
-          check_for_sunk_ship(opponent)
+          # check_for_sunk_ship(opponent)
         else
           @board.layout[first_coordinate][second_coordinate] = "M"
           "You missed."
