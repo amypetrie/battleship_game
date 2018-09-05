@@ -92,7 +92,6 @@ class Peg
   end
 
   def create_specific_ship(size, stern)
-    binding.pry
     letter_index = letters.rindex(location[0])
     number = location[1]
     middle = []
@@ -100,13 +99,14 @@ class Peg
     if size < 3 && ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
       @ship_ids << [stern] + [location]
     elsif ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
-binding.pry
-      if stern[1] == number && (letters.rindex(location[0])
-        # middle << "x"
+      if stern[1] == number && (letters.rindex(location[0]))
 
-      elsif stern[0] == location[0] && (stern[1] > location[1])
-        middle << [stern[0], stern[1] - location[1]]
+      elsif (stern[0] == location[0]) && (stern[1] > location[1])
+        @ship_ids << [location] + [stern] + [stern[0], stern[1] - location[1]]
+      elsif (stern[0] == location[0]) && (stern[1] < location[1])
+        @ship_ids << [stern[0], (location[1] - stern[1])]
       end
+
     end
   end
 
