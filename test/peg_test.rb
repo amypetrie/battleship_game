@@ -83,17 +83,24 @@ class PegTest < Minitest::Test
     human = Player.new("human")
     computer = Player.new("computer")
     human.make_specific_ship(3, ["b", 3], ["b", 1])
-    binding.pry
+
     assert_equal 3, human.ship_ids.flatten(1).length
   end
 
   def test_it_creates_a_specific_ship_length_2
-    skip
     human = Player.new("human")
     computer = Player.new("computer")
     human.make_specific_ship(2, ["b", 1], ["b", 2])
 
     assert_equal 2, human.ship_ids.flatten(1).length
+  end
+
+  def test_it_creates_a_specific_ship_length_3_varying_input
+    human = Player.new("human")
+    computer = Player.new("computer")
+    human.make_specific_ship(3, ["a", 1], ["c", 1])
+
+    assert_equal 3, human.ship_ids.flatten(1).length
   end
 
   def test_randomize_ship_bow

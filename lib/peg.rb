@@ -99,12 +99,15 @@ class Peg
     if size < 3 && ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
       @ship_ids << [stern] + [location]
     elsif ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
-      if stern[1] == number && (letters.rindex(location[0]))
+      binding.pry
+      if stern[1] == number && (letters.rindex(location[0]) > letters.rindex(stern[0]))
 
+      elsif stern[1] == number && (letters.rindex(location[0]) < letters.rindex(stern[0]))
+        # @ship_ids << [location] + [stern] + [[stern[0], location[1]]]
       elsif (stern[0] == location[0]) && (stern[1] > location[1])
         @ship_ids << [location] + [stern] + [stern[0], stern[1] - location[1]]
       elsif (stern[0] == location[0]) && (stern[1] < location[1])
-        @ship_ids << [stern[0], (location[1] - stern[1])]
+        @ship_ids << [location] + [stern] + [[stern[0], location[1] - stern[1]]]
       end
 
     end
