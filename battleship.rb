@@ -16,9 +16,10 @@ if user_input == "p"
   puts game.introduction
   user_input = $stdin.gets.chomp
   game.human_player.create_human_ship(user_input, 2)
-  p game.human_player.ship_ids
-
-
+  puts game.prompt_for_second_ship
+  user_input = $stdin.gets.chomp
+  game.human_player.create_human_ship(user_input, 3)
+  puts game.display_map(game.human_player)
   #display map and prompt position.
 
 end

@@ -33,4 +33,10 @@ class BoardTest < Minitest::Test
     assert_equal expected, board.layout
   end
 
+  def test_current_layout_is_returned
+    board = Board.new("computer")
+
+    assert_instance_of Array, board.current_layout
+  end
+
 end

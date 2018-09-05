@@ -49,4 +49,9 @@ class GameTest < Minitest::Test
     assert_instance_of String, game.prompt_for_second_ship
   end
 
+  def test_display_map_prints_board_layout
+    skip
+    game = Game.new
+  end
+
 end

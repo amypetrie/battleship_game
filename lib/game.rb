@@ -28,4 +28,8 @@ class Game
   def prompt_for_second_ship
     "Enter the beginning and end coordinate for the three-unit ship: "
   end
+
+  def display_map(player)
+    player.guess_board.current_layout
+  end
 end
