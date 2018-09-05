@@ -43,7 +43,10 @@ class GameTest < Minitest::Test
     assert_instance_of String, game.introduction
   end
 
-  def test_create_human_ship
+  def test_it_contains_prompt_for_second_ship
+    game = Game.new
+
+    assert_instance_of String, game.prompt_for_second_ship
   end
 
 end

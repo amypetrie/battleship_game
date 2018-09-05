@@ -25,4 +25,7 @@ class Game
     Enter the squares for the two-unit ship: "
   end
 
+  def prompt_for_second_ship
+    "Enter the beginning and end coordinate for the three-unit ship: "
+  end
 end
