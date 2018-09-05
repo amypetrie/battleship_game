@@ -20,3 +20,10 @@ if user_input == "p"
   Enter the squares for the two-unit ship: "
   user_input = $stdin.gets.chomp
 end
+
+bow = user_input.downcase.chars[0..1]
+bow[1] = bow[1].to_i
+stern = user_input.downcase.chars[3..4]
+stern[4] = stern[4].to_i
+
+ship = game.human_player.make_specific_ship(2, bow, stern)

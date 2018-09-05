@@ -60,4 +60,12 @@ class PlayerTest < Minitest::Test
     assert_equal 5, player.ship_ids.flatten(1).length
   end
 
+  def test_making_a_specific_ship
+    player = Player.new("human")
+    player.make_specific_ship(2)
+    player.make_specific_ship(3)
+
+    assert_equal 5, player.ship_ids.flatten(1).length
+  end
+  
 end

@@ -50,13 +50,13 @@ class Peg
     loop do
       location = [@letters.sample] + [@numbers.sample]
       @location = location
-    break if ship_coordinate_is_valid == false
+    break if ship_coordinate_is_invalid == false
       randomize_ship_bow
     end
     return location
   end
 
-  def ship_coordinate_is_valid
+  def ship_coordinate_is_invalid
     if @ship_ids.include?(location)
       true
     else
@@ -64,18 +64,17 @@ class Peg
     end
   end
 
-  def check_for_sunk_ship(opponent)
-    opponent.ship_ids.each do |ship_array|
-      if ship_array.length.include?(location)
-        p "You got a hit!"
-        opponent.ship_ids.delete(location)
-        p "You sunk a ship!"
-        opponent.ship_ids.delete(ship_array)
-        binding.pry
-      else
-      end
-    end
-  end
+  # def check_for_sunk_ship(opponent)
+  #   opponent.ship_ids.each do |ship_array|
+  #     if ship_array.length.include?(location)
+  #       p "You got a hit!"
+  #       opponent.ship_ids.delete(location)
+  #       p "You sunk a ship!"
+  #       opponent.ship_ids.delete(ship_array)
+  #     else
+  #     end
+  #   end
+  # end
 
   def place_valid_peg_on_board(opponent)
     space_is_valid
@@ -90,6 +89,25 @@ class Peg
         end
       else
       end
+  end
+
+  def create_specific_ship(size, stern)
+    binding.pry
+    letter_index = letters.rindex(location[0])
+    number = location[1]
+    middle = []
+    stern_position = []
+    if size < 3 && ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
+      @ship_ids << [stern] + [location]
+    elsif ship_coordinate_is_invalid == false && (@ship_ids.include?(stern)== false)
+binding.pry
+      if stern[1] == number && (letters.rindex(location[0])
+        # middle << "x"
+
+      elsif stern[0] == location[0] && (stern[1] > location[1])
+        middle << [stern[0], stern[1] - location[1]]
+      end
+    end
   end
 
   def create_computer_ship(size)
