@@ -55,3 +55,15 @@ loop do
 end
 
 end
+
+# def check_for_sunk_ship(opponent)
+#   opponent.ship_ids.each do |ship_array|
+#     if ship_array.length.include?(location)
+#       p "You got a hit!"
+#       opponent.ship_ids.delete(location)
+#       p "You sunk a ship!"
+#       opponent.ship_ids.delete(ship_array)
+#     else
+#     end
+#   end
+# end

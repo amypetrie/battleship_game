@@ -18,6 +18,30 @@ class PegTest < Minitest::Test
     assert_instance_of Peg, peg
   end
 
+  def test_it_has_a_board_object_as_instance_variable
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+
+    assert_instance_of Board, peg.board
+  end
+
+  def test_it_has_a_ship_ids_as_instance_variable
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+
+    assert_equal player2.ship_ids, peg.ship_ids
+  end
+
+  def test_it_does_not_need_to_be_created_with_a_location
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids)
+
+    assert_instance_of Peg, peg
+  end
+
   def test_it_returns_first_board_coordinate
     player = Player.new("human")
     player2 = Player.new("computer")
@@ -59,12 +83,48 @@ class PegTest < Minitest::Test
     assert true, peg.space_is_valid(player2, player)
   end
 
+  def test_need_help_writing_this_test_invalid_peg_location
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+    peg2 = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+
+    assert_equal true, peg2.space_is_valid(player2, player)
+  end
+
   def test_placing_valid_peg_on_board_as_miss
     player = Player.new("human")
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
 
     assert_instance_of String, peg.place_valid_peg_on_board(player2, player)
+  end
+
+  def test_placing_valid_peg_on_board_as_hit
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    ship_ids = [["a", 1]]
+    peg = Peg.new(player.guess_board, ship_ids, ["a", 2])
+
+    assert_instance_of String, peg.place_valid_peg_on_board(player2, player)
+  end
+
+  def test_if_ship_coordinate_is_invalid
+    human = Player.new("human")
+    computer = Player.new("computer")
+    ship_ids = ["a", 1]
+    peg = Peg.new(computer.guess_board, ship_ids, ["a", 1])
+
+    assert true, peg.ship_coordinate_is_invalid
+  end
+
+  def test_displaying_hit_message
+    player = Player.new("human")
+    player2 = Player.new("computer")
+    peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
+    peg.hit_message(player2)
+
+    assert_instance_of String, peg.hit_message(player2)
   end
 
   def test_it_creates_a_computer_ship
