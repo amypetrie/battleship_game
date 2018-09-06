@@ -5,8 +5,7 @@ class Peg
               :location,
               :ship_ids,
               :letters,
-              :numbers,
-              :status
+              :numbers
 
   def initialize(board, ship_ids, location=[])
     @board = board
@@ -14,7 +13,7 @@ class Peg
     @letters = ("a".."d").to_a
     @numbers = (1..4).to_a
     @ship_ids = ship_ids
-    @status = ""
+
   end
 
   def first_coordinate
@@ -34,7 +33,6 @@ class Peg
       location = [@letters.sample] + [@numbers.sample]
       @location = location
     break if space_is_valid(opponent, player) == true
-      randomize_location(opponent, player)
     end
   end
 
@@ -49,6 +47,7 @@ class Peg
       user_input[1] = user_input[1].to_i
       @location = user_input
       place_valid_peg_on_board(opponent, player)
+
     end
   end
 
@@ -57,30 +56,16 @@ class Peg
       location = [@letters.sample] + [@numbers.sample]
       @location = location
     break if ship_coordinate_is_invalid == false
-      randomize_ship_bow
     end
-    return location
   end
 
   def ship_coordinate_is_invalid
     if @ship_ids.include?(location)
-      true
+      return true
     else
-      false
+      return false
     end
   end
-
-  # def check_for_sunk_ship(opponent)
-  #   opponent.ship_ids.each do |ship_array|
-  #     if ship_array.length.include?(location)
-  #       p "You got a hit!"
-  #       opponent.ship_ids.delete(location)
-  #       p "You sunk a ship!"
-  #       opponent.ship_ids.delete(ship_array)
-  #     else
-  #     end
-  #   end
-  # end
 
   def hit_message(opponent)
     p "A hit at #{location} against #{opponent.id}!"
