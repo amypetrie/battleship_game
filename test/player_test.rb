@@ -39,7 +39,7 @@ class PlayerTest < Minitest::Test
   def test_make_specific_guess
     player = Player.new("human")
     player2 = Player.new("computer")
-    player.make_specific_guess(["a", 4], player2)
+    player.make_specific_guess("a4", player2)
 
     assert_equal true, player.guess_board.layout.flatten.include?("M")
   end
