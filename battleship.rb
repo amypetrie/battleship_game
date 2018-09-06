@@ -28,9 +28,9 @@ if user_input == "p"
   puts "For reference during testing, the computer ships are located at: "
   puts "\n"
   p game.computer_player.ship_ids.flatten(1)
+  puts "\n"
 
 loop do
-  puts "\n"
   puts game.display_map(game.human_player)
   puts "\n"
   puts game.prompt_for_guess
@@ -41,13 +41,16 @@ loop do
   puts "\n"
   puts game.display_map(game.human_player)
   puts "\n"
-  puts "The computer will now make a guess."
-  puts "\n"
+  puts "The computer will now make a guess. Press enter to continue."
+  user_input = $stdin.gets.chomp
   game.computer_player.make_random_guess(game.human_player)
   puts "\n"
   puts "This is the computer's board."
   puts "\n"
   puts game.display_map(game.computer_player)
+  puts "\n"
+  puts "Press enter to continue."
+  user_input = $stdin.gets.chomp
   puts "\n"
 end
 

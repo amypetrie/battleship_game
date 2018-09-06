@@ -91,12 +91,10 @@ class Peg
   end
 
   def place_valid_peg_on_board(opponent, player)
-    # space_is_valid(opponent, player)
     if space_is_valid(opponent, player) == true
       if opponent.ship_ids.flatten(1).include?(location)
         @board.layout[first_coordinate][second_coordinate] = "H"
         hit_message(opponent)
-        # check_for_sunk_ship(opponent)
         else
         @board.layout[first_coordinate][second_coordinate] = "M"
         miss_message(opponent)

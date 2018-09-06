@@ -15,7 +15,6 @@ class Player
     location = user_input.downcase.chars
     location[1] = location[1].to_i
     peg = Peg.new(@guess_board, @ship_ids, location)
-    # peg.space_is_valid(opponent, player)
     peg.place_valid_peg_on_board(opponent, player)
   end
 
