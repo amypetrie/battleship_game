@@ -6,9 +6,7 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/player'
 require './lib/board'
-require './lib/ship'
 require './lib/peg'
-require './lib/validate'
 
 class PegTest < Minitest::Test
 
@@ -48,7 +46,7 @@ class PegTest < Minitest::Test
     player = Player.new("human")
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids)
-    peg.randomize_location
+    peg.randomize_location(player2, player)
 
     assert_equal true, peg.location != ""
   end
@@ -58,7 +56,7 @@ class PegTest < Minitest::Test
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
 
-    assert true, peg.space_is_valid
+    assert true, peg.space_is_valid(player2, player)
   end
 
   def test_placing_valid_peg_on_board_as_miss
@@ -66,7 +64,7 @@ class PegTest < Minitest::Test
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
 
-    assert_equal "You missed.", peg.place_valid_peg_on_board(player2)
+    assert_instance_of String, peg.place_valid_peg_on_board(player2, player)
   end
 
   def test_it_creates_a_computer_ship

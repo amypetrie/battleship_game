@@ -14,8 +14,8 @@ class Board
     @layout = Array.new(length) { Array.new(width, 0) }
   end
 
-end
+  def current_layout
+     @layout.map { |x| x.join(' ') }
+  end
 
-# def print_board(layout)
-#    puts layout.map { |x| x.join(' ') }
-# end
+end

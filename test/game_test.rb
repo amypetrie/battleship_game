@@ -6,9 +6,7 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/player'
 require './lib/board'
-require './lib/ship'
 require './lib/peg'
-require './lib/validate'
 
 class GameTest < Minitest::Test
 
@@ -43,7 +41,22 @@ class GameTest < Minitest::Test
     assert_instance_of String, game.introduction
   end
 
-  def test_create_human_ship
+  def test_it_contains_prompt_for_second_ship
+    game = Game.new
+
+    assert_instance_of String, game.prompt_for_second_ship
+  end
+
+  def test_it_prompts_for_a_guess
+    game = Game.new
+
+    assert_instance_of String, game.prompt_for_guess
+  end
+
+  def test_display_map_prints_board_layout
+    game = Game.new
+
+    assert_instance_of Array, game.display_map(game.human_player)
   end
 
 end

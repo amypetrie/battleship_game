@@ -29,20 +29,26 @@ class Peg
     @board.layout[first_coordinate][second_coordinate]
   end
 
-  def randomize_location
+  def randomize_location(opponent, player)
     loop do
       location = [@letters.sample] + [@numbers.sample]
       @location = location
-    break if space_is_valid == true
-      randomize_location
+    break if space_is_valid(opponent, player) == true
+      randomize_location(opponent, player)
     end
   end
 
-  def space_is_valid
+  def space_is_valid(opponent, player)
     if board_position == 0
       true
-    else
-      "You already have a peg at this location."
+    elsif opponent.id == "computer"
+      p "You already have a peg at this location, try again:"
+      puts "\n"
+      user_input = $stdin.gets.chomp.downcase.chars
+      puts "\n"
+      user_input[1] = user_input[1].to_i
+      @location = user_input
+      place_valid_peg_on_board(opponent, player)
     end
   end
 
@@ -76,19 +82,25 @@ class Peg
   #   end
   # end
 
-  def place_valid_peg_on_board(opponent)
-    space_is_valid
-      if space_is_valid == true
-        if opponent.ship_ids.flatten(1).include?(location)
-          @board.layout[first_coordinate][second_coordinate] = "H"
-          "You got a hit!"
-          check_for_sunk_ship(opponent)
+  def hit_message(opponent)
+    p "A hit at #{location} against #{opponent.id}!"
+  end
+
+  def miss_message(opponent)
+    p "A miss at #{location} against #{opponent.id}."
+  end
+
+  def place_valid_peg_on_board(opponent, player)
+    if space_is_valid(opponent, player) == true
+      if opponent.ship_ids.flatten(1).include?(location)
+        @board.layout[first_coordinate][second_coordinate] = "H"
+        hit_message(opponent)
         else
-          @board.layout[first_coordinate][second_coordinate] = "M"
-          "You missed."
-        end
-      else
+        @board.layout[first_coordinate][second_coordinate] = "M"
+        miss_message(opponent)
       end
+    else
+    end
   end
 
   def specific_ship(size, stern)
