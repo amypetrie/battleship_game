@@ -26,7 +26,6 @@ class Peg
   end
 
   def board_position
-    binding.pry
     @board.layout[first_coordinate][second_coordinate]
   end
 
@@ -43,7 +42,7 @@ class Peg
     if board_position == 0
       true
     else
-      "You already have a peg at this location."
+      p "You already have a peg at this location."
     end
   end
 
@@ -77,16 +76,24 @@ class Peg
   #   end
   # end
 
+  def hit_message(opponent)
+    p "A hit at #{location} against #{opponent.id}!"
+  end
+
+  def miss_message(opponent)
+    p "A miss at #{location} against #{opponent.id}."
+  end
+
   def place_valid_peg_on_board(opponent)
     space_is_valid
       if space_is_valid == true
         if opponent.ship_ids.flatten(1).include?(location)
           @board.layout[first_coordinate][second_coordinate] = "H"
-          "You got a hit!"
+          hit_message(opponent)
           # check_for_sunk_ship(opponent)
         else
           @board.layout[first_coordinate][second_coordinate] = "M"
-          "You missed."
+          miss_message(opponent)
         end
       else
       end

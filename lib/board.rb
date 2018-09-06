@@ -15,7 +15,7 @@ class Board
   end
 
   def current_layout
-     layout.map { |x| x.join(' ') }
+     @layout.map { |x| x.join(' ') }
   end
 
 end

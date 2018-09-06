@@ -66,7 +66,7 @@ class PegTest < Minitest::Test
     player2 = Player.new("computer")
     peg = Peg.new(player.guess_board, player2.ship_ids, ["a", 2])
 
-    assert_equal "You missed.", peg.place_valid_peg_on_board(player2)
+    assert_instance_of String, peg.place_valid_peg_on_board(player2)
   end
 
   def test_it_creates_a_computer_ship
