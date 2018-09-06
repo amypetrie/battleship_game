@@ -33,7 +33,7 @@ class Game
   end
 
   def display_map(player)
-    puts "HUMAN BOARD\n"
+    puts "#{player.id.upcase} BOARD\n"
     player.guess_board.current_layout
   end
 end

@@ -11,11 +11,12 @@ class Player
   end
 
   def make_specific_guess(user_input, opponent)
+    player = self
     location = user_input.downcase.chars
     location[1] = location[1].to_i
     peg = Peg.new(@guess_board, @ship_ids, location)
-    peg.space_is_valid
-    peg.place_valid_peg_on_board(opponent)
+    # peg.space_is_valid(opponent, player)
+    peg.place_valid_peg_on_board(opponent, player)
   end
 
   def create_human_ship(user_input, size)
@@ -28,9 +29,10 @@ class Player
   end
 
   def make_random_guess(opponent)
+    player = self
     peg = Peg.new(@guess_board, @ship_ids)
-    peg.randomize_location
-    peg.place_valid_peg_on_board(opponent)
+    peg.randomize_location(opponent, player)
+    peg.place_valid_peg_on_board(opponent, player)
   end
 
   def make_random_ship(size)

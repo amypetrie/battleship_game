@@ -6,9 +6,7 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/player'
 require './lib/board'
-require './lib/ship'
 require './lib/peg'
-require './lib/validate'
 
 class GameTest < Minitest::Test
 
